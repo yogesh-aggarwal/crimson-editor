@@ -4,6 +4,7 @@ import sqlite3
 import tempfile
 import threading
 import time
+from elevate import elevate
 from tkinter import *
 from tkinter import colorchooser, filedialog, messagebox, simpledialog, ttk
 
@@ -45,7 +46,7 @@ Pending -
 1) To update theme name is status bar if no theme is applied.
 """
 
-
+# elevate()
 def create_shortcut(*awargs):
     desktop = winshell.desktop()
     path = os.path.join(desktop, "Crimson Editor.lnk")
@@ -62,8 +63,7 @@ def create_shortcut(*awargs):
 
 
 def sql(command):
-    conn = sqlite3.connect(
-        r"table_types.db")
+    conn = sqlite3.connect(r"data.db")
     c = conn.cursor()
     c.execute(command)
     data = []
@@ -71,7 +71,7 @@ def sql(command):
         for data_fetched in c.fetchall():
             data.append(data_fetched)
     except:
-        print("SQL:SOME ERROR OCCURED")
+        print("SQL: SOME ERROR OCCURED")
     conn.commit()
     c.close()
     conn.close()
@@ -83,9 +83,8 @@ def start(*awargs):
     global main
     main = Tk()
     main.title("Crimson Editor - Untitled")
-    main.geometry('900x450')
-    main.iconbitmap(
-        r"assests\icon.ico")
+    main.geometry('1100x600')
+    main.iconbitmap(r"assests\icon.ico")
     width = 900
     height = 450
     x = (main.winfo_screenwidth() // 2) - (width // 2)
@@ -115,17 +114,13 @@ def start(*awargs):
     global mode_var
     mode_var = StringVar()  # For user mode, whether Basic or Advanced
     global thread_var
-    # For autosave, if autosave is ON its value is 1 and threading will start otherwise its value is 0 and threading will not performed. Helps in stoping the threading.
-    thread_var = IntVar()
+    thread_var = IntVar()  # For autosave, if autosave is ON its value is 1 and threading will start otherwise its value is 0 and threading will not performed. Helps in stoping the threading.
     global status_bar_exist
-    # For status bar, checking whether status bar exists or not.
-    status_bar_exist = IntVar()
+    status_bar_exist = IntVar()  # For status bar, checking whether status bar exists or not.
     global full_screen_var
-    # For checking whether to use full screen mode or not.
-    full_screen_var = IntVar()
+    full_screen_var = IntVar()  # For checking whether to use full screen mode or not.
     global status_bar_status
-    # For storing information to be shown on the status bar.
-    status_bar_status = StringVar()
+    status_bar_status = StringVar()  # For storing information to be shown on the status bar.
     global font_size
     font_size = IntVar()  # For defining the font size
     font_size.set(18)
@@ -135,8 +130,8 @@ def start(*awargs):
 
     def recreate_stuf(*awargs):
         """Recreates all the stuf. Means destroy all first then recreate them."""
-        file = open(r"C:\Users\YOGESH~1\AppData\Local\Temp\tempfile.ced", "a+")
-        file = open(r"C:\Users\YOGESH~1\AppData\Local\Temp\tempfile.ced", "w")
+        file = open(tempfile.gettempdir() + r"\tempfile.ced", "a+")
+        file = open(tempfile.gettempdir() + r"\tempfile.ced", "w")
         file.write(textarea.get("1.0", END).rstrip())
         file.close()
 
@@ -158,8 +153,8 @@ def start(*awargs):
         # else:
         #     status_bar.destroy()
 
-        file = open(r"C:\Users\YOGESH~1\AppData\Local\Temp\tempfile.ced", "a+")
-        file = open(r"C:\Users\YOGESH~1\AppData\Local\Temp\tempfile.ced", "r")
+        file = open(tempfile.gettempdir() + r"\tempfile.ced", "a+")
+        file = open(tempfile.gettempdir() + r"\tempfile.ced", "r")
         textarea.insert("1.0", file.read())
         file.close()
 
@@ -577,8 +572,7 @@ def start(*awargs):
                 pass
             status_bar_decide()
         main.bind("<F9>", auto_save_file_by_key)
-        fileMenu = Menu(menu, tearoff=0, activeforeground=color_fg.get(), activebackground=color_bg.get(
-        ), background=color_bg.get(), selectcolor=color_fg.get(), foreground=color_fg.get(), font=("google san bold", 11))
+        fileMenu = Menu(menu, tearoff=0, activeforeground=color_bg.get(), activebackground=color_fg.get(), background=color_bg.get(), selectcolor=color_bg.get(), foreground=color_fg.get(), font=("google san bold", 11))
         menu.add_cascade(label="File", menu=fileMenu)
         fileMenu.add_cascade(label="New", command=start)
         fileMenu.add_cascade(label="Open", command=file_dialog)
@@ -663,9 +657,9 @@ def start(*awargs):
                 word_wrap_var.get()))
             read_word_wrap_file()
             file = open(
-                r"C:\Users\YOGESH~1\AppData\Local\Temp\tempfile.ced", "a+")
+                tempfile.gettempdir() + r"\tempfile.ced", "a+")
             file = open(
-                r"C:\Users\YOGESH~1\AppData\Local\Temp\tempfile.ced", "w")
+                tempfile.gettempdir() + r"\tempfile.ced", "w")
             file.write(textarea.get("1.0", END).rstrip())
             file.close()
 
@@ -675,12 +669,12 @@ def start(*awargs):
             create_text_area()
 
             file = open(
-                r"C:\Users\YOGESH~1\AppData\Local\Temp\tempfile.ced", "a+")
+                tempfile.gettempdir() + r"\tempfile.ced", "a+")
             file = open(
-                r"C:\Users\YOGESH~1\AppData\Local\Temp\tempfile.ced", "r")
+                tempfile.gettempdir() + r"\tempfile.ced", "r")
             textarea.insert("1.0", file.read())
             file.close()
-            os.remove(r"C:\Users\YOGESH~1\AppData\Local\Temp\tempfile.ced")
+            os.remove(tempfile.gettempdir() + r"\tempfile.ced")
 
         def word_wrap_by_key(*awargs):
             temp = sql("SELECT * FROM ATTRIBUTES")
@@ -800,18 +794,16 @@ def start(*awargs):
             if attribute == "shortcut_keys":
                 webbrowser.open("shortcut_keys.html", new=2)
             elif attribute == "help":
-                webbrowser.open("help.html", new=2)
+                webbrowser.open("help.html", new=2) 
 
         def about(*awargs):
             messagebox.showinfo("About", "Made by Yogesh Aggarwal")
-        aboutMenu = Menu(menu, tearoff=0, activeforeground=color_fg.get(), activebackground=color_bg.get(
-        ), background=color_bg.get(), selectcolor=color_fg.get(), foreground=color_fg.get(), font=("google san bold", 11))
+        aboutMenu = Menu(menu, tearoff=0, activeforeground=color_fg.get(), activebackground=color_bg.get(), background=color_bg.get(), selectcolor=color_fg.get(), foreground=color_fg.get(), font=("google san bold", 11))
         menu.add_cascade(label="Help", menu=aboutMenu)
-        aboutMenu.add_command(label="Shortcut keys",
-                              command=lambda: open_file("shortcut_keys"))
+        aboutMenu.add_command(label="Shortcut keys", command=lambda: open_file("shortcut_keys"))
         aboutMenu.add_separator()
         aboutMenu.add_command(label="Help", command=lambda: open_file("help"))
-        aboutMenu.add_command(label="About", command=about)
+        aboutMenu.add_command(label="About", command=about)        
 
     def settings_menu(*awargs):
         menu.add_command(label="Settings", command=settings)
@@ -972,12 +964,11 @@ def start(*awargs):
             temp_thread_function = threading.Thread(target=convert)
             temp_thread_function.daemon = True
             temp_thread_function.start()
-
+        
         def run_file(*awargs):
             import webbrowser
-            webbrowser.open(
-                sql("SELECT value FROM TEMP_WORK WHERE work_name='file_location'")[0][0], new=2)
-
+            webbrowser.open(sql("SELECT value FROM TEMP_WORK WHERE work_name='file_location'")[0][0], new=2)
+        
         main.bind("<F6>", text_to_speech)
         main.bind("<F7>", search)
         main.bind("<F8>", translate_text)
@@ -987,8 +978,7 @@ def start(*awargs):
         ), background=color_bg.get(), selectcolor=color_fg.get(), foreground=color_fg.get(), font=("google san bold", 11))
         menu.add_cascade(label="Tools", menu=toolsMenu)
         toolsMenu.add_command(label="Revert to checkpoint", command=checkpoint)
-        toolsMenu.add_command(label="Convert into speech",
-                              command=text_to_speech)
+        toolsMenu.add_command(label="Convert into speech", command=text_to_speech)
         toolsMenu.add_command(label="Search Wikipedia", command=search)
         toolsMenu.add_command(label="Translate", command=translate_text)
         toolsMenu.add_command(label="Run/Open", command=run_file)
@@ -1135,7 +1125,7 @@ def start(*awargs):
             font_size.set(font_size.get() - 1)
             recreate_stuf()
             sql("UPDATE ATTRIBUTES SET value='{}' WHERE attribute_name='font_size'")
-
+    
     def right_click_menu(*awargs):
         def popup(event):
             try:
@@ -1158,7 +1148,7 @@ def start(*awargs):
     main.bind("<Escape>", full_screen_ESC)
     main.bind("<Control-MouseWheel>", change_font_size)
     main.bind("<Button-3>", right_click_menu)
-
+    
     menu = Menu(main, font=("google san bold", 11))
     menu.config(bg=color_fg.get())
     main.config(menu=menu)
@@ -1186,8 +1176,7 @@ def start(*awargs):
 
 def run_check(*awargs):
     try:
-        run = (sql("SELECT value FROM ATTRIBUTES WHERE attribute_name='runtime'"))[
-            0][0]
+        run = (sql("SELECT value FROM ATTRIBUTES WHERE attribute_name='runtime'"))[0][0]
         if run == "opened_before":
             run = "opened_before"
     except:
@@ -1205,8 +1194,7 @@ def run_check(*awargs):
                         'Playful Greens and Blues', 'Playful Greens and Blues', 'Playful Greens and Blues', 'Playful Greens and Blues', 'Fresh & Energetic', 'Fresh & Energetic', 'Fresh & Energetic', 'Fresh & Energetic', 'Surf & Turf', 'Surf & Turf', 'Surf & Turf', 'Surf & Turf', 'Autumn in Vermont', 'Autumn in Vermont', 'Autumn in Vermont', 'Autumn in Vermont', 'Icy Blues and Grays', 'Icy Blues and Grays', 'Icy Blues and Grays', 'Icy Blues and Grays', 'Birds & Berries', 'Birds & Berries', 'Birds & Berries', 'Birds & Berries', 'Day & Night', 'Day & Night', 'Day & Night', 'Day & Night', 'Stylish & Retro', 'Stylish & Retro', 'Stylish & Retro', 'Stylish & Retro', 'Shades of Citrus', 'Shades of Citrus', 'Shades of Citrus', 'Shades of Citrus', 'Sunset to Dusk', 'Sunset to Dusk', 'Sunset to Dusk', 'Sunset to Dusk', 'Bright & Tropical', 'Bright & Tropical', 'Bright & Tropical', 'Bright & Tropical')
             sql("""CREATE TABLE IF NOT EXISTS "THEME_TABLE" ("theme_name" varchar ( 20 ), "color_bg"	varchar ( 10 ),	"color_fg" varchar ( 10 ), "category" varchar ( 50 ))""")
             for index in range(len(themes)):
-                sql(
-                    f"""INSERT INTO THEME_TABLE VALUES("{themes[index]}", "{color_bg[index]}", "{color_fg[index]}","{category}");""")
+                sql(f"""INSERT INTO THEME_TABLE VALUES("{themes[index]}", "{color_bg[index]}", "{color_fg[index]}","{category}");""")
 
             try:
                 # Attributes table
@@ -1228,10 +1216,11 @@ def run_check(*awargs):
             except:
                 sql("""UPDATE ATTRIBUTES SET value='opened_before' WHERE attribute_name='runtime'""")
         create_database()
-        create_shortcut()
+        # create_shortcut()
         start()
     else:
         start()
 
 
 run_check()
+# start()
