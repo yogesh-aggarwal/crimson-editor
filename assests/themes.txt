@@ -1,0 +1,44 @@
+INSERT INTO THEME_TABLE VALUES("mist", "#90AFC5", "#FFFFFF","subdued_and_professional");
+INSERT INTO THEME_TABLE VALUES("stone", "#336B87", "#FFFFFF","subdued_and_professional");
+INSERT INTO THEME_TABLE VALUES("shadow", "#2A3132", "#FFFFFF","subdued_and_professional");
+INSERT INTO THEME_TABLE VALUES("autumn_foliage", "#763626", "#FFFFFF","subdued_and_professional");
+
+INSERT INTO THEME_TABLE VALUES("crevice", "#46211A", "#FFFFFF","dark_and_earthy");
+INSERT INTO THEME_TABLE VALUES("cloud_shadow", "#693D3D", "#FFFFFF","dark_and_earthy");
+INSERT INTO THEME_TABLE VALUES("desert", "#BA5536", "#FFFFFF","dark_and_earthy");
+INSERT INTO THEME_TABLE VALUES("red_clay", "#A43820", "#FFFFFF","dark_and_earthy");
+
+INSERT INTO THEME_TABLE VALUES("thunder_cloud", "#505160", "#FFFFFF","crisp_and_dramatic");
+INSERT INTO THEME_TABLE VALUES("waterfall", "#68829E", "#FFFFFF","crisp_and_dramatic");
+INSERT INTO THEME_TABLE VALUES("moss", "#AEBD38", "#FFFFFF","crisp_and_dramatic");
+INSERT INTO THEME_TABLE VALUES("meadow", "#598234", "#FFFFFF","crisp_and_dramatic");
+
+INSERT INTO THEME_TABLE VALUES("deep_aqua", "#003B46", "#FFFFFF","cool_blues");
+INSERT INTO THEME_TABLE VALUES("ocean", "#07575B", "#FFFFFF","cool_blues");
+INSERT INTO THEME_TABLE VALUES("wave", "#66A5AD", "#FFFFFF","cool_blues");
+INSERT INTO THEME_TABLE VALUES("seafoam", "#C4DFE6", "#000000","cool_blues");
+
+INSERT INTO THEME_TABLE VALUES("forest_green", "#2E4600", "#FFFFFF","outdoorsy_and_natural");
+INSERT INTO THEME_TABLE VALUES("grass", "#486B00", "#FFFFFF","outdoorsy_and_natural");
+INSERT INTO THEME_TABLE VALUES("lime", "#A2C523", "#FFFFFF","outdoorsy_and_natural");
+INSERT INTO THEME_TABLE VALUES("earth", "#7D4427", "#FFFFFF","outdoorsy_and_natural");
+
+INSERT INTO THEME_TABLE VALUES("blue_black", "#021C1E", "#FFFFFF","watery_blue_greens");
+INSERT INTO THEME_TABLE VALUES("cadet_blue", "004445", "#FFFFFF","watery_blue_greens");
+INSERT INTO THEME_TABLE VALUES("rain", "#2C7873", "#FFFFFF","watery_blue_greens");
+INSERT INTO THEME_TABLE VALUES("greenery", "#6FB98F", "#FFFFFF","watery_blue_greens");
+
+INSERT INTO THEME_TABLE VALUES("sky", "#375E97", "#FFFFFF","primary_colors_with_a_vibrant_twist");
+INSERT INTO THEME_TABLE VALUES("sunset", "#FB6542", "#FFFFFF","primary_colors_with_a_vibrant_twist");
+INSERT INTO THEME_TABLE VALUES("sunflower", "#FBBB00", "#FFFFFF","primary_colors_with_a_vibrant_twist");
+INSERT INTO THEME_TABLE VALUES("grass", "#3F681C", "#FFFFFF","primary_colors_with_a_vibrant_twist");
+
+INSERT INTO THEME_TABLE VALUES("aquamarine", "#98DBC6", "#FFFFFF","refreshing_and_preety");
+INSERT INTO THEME_TABLE VALUES("torquoise", "#5BC8AC", "#FFFFFF","refreshing_and_preety");
+INSERT INTO THEME_TABLE VALUES("canary_yellow", "#E6D72A", "#FFFFFF","refreshing_and_preety");
+INSERT INTO THEME_TABLE VALUES("pink_tulip", "#F18D9E", "#FFFFFF","refreshing_and_preety");
+
+INSERT INTO THEME_TABLE VALUES("blue_pine", "#324851", "#FFFFFF","playful_greens_and_blues");
+INSERT INTO THEME_TABLE VALUES("new_grass", "#86AC41", "#FFFFFF","playful_greens_and_blues");
+INSERT INTO THEME_TABLE VALUES("reflection", "#34675C", "#FFFFFF","playful_greens_and_blues");
+INSERT INTO THEME_TABLE VALUES("mist", "#7DA3A1", "#FFFFFF","playful_greens_and_blues");
