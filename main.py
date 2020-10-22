@@ -9,8 +9,8 @@ from tkinter import *
 from tkinter import colorchooser, filedialog, messagebox, simpledialog, ttk
 
 import pyautogui
-import winshell
-from win32com.client import Dispatch
+# import winshell
+# from win32com.client import Dispatch
 
 
 """
@@ -52,7 +52,7 @@ def create_shortcut(*awargs):
     path = os.path.join(desktop, "Crimson Editor.lnk")
     target = r"dist\gui.exe"
     wDir = r"P:\Media\Crimson Editor"
-    icon = r"assests\icon.ico"
+    icon = r"assets/icon.ico"
 
     shell = Dispatch('WScript.Shell')
     shortcut = shell.CreateShortCut(path)
@@ -84,7 +84,7 @@ def start(*awargs):
     main = Tk()
     main.title("Crimson Editor - Untitled")
     main.geometry('1100x600')
-    main.iconbitmap(r"assests\icon.ico")
+    main.iconbitmap(r"assests/icon.ico")
     width = 900
     height = 450
     x = (main.winfo_screenwidth() // 2) - (width // 2)
@@ -210,8 +210,7 @@ def start(*awargs):
         global textarea
         global xview_scrollbar
         global yview_scrollbar
-        textarea = Text(main, width=100, height=80, bg=color_bg.get(), fg=color_fg.get(), font=("google sans regular", font_size.get(
-        )), selectbackground=color_fg.get(), selectforeground=color_bg.get(), wrap=word_wrap_var.get(), relief=FLAT, bd=3)
+        textarea = Text(main, width=100, height=80, bg=color_bg.get(), fg=color_fg.get(), font=("google sans regular", font_size.get()), selectbackground=color_fg.get(), selectforeground=color_bg.get(), wrap=word_wrap_var.get(), relief=FLAT, bd=3)
         yview_scrollbar = Scrollbar(main)
         yview_scrollbar.config(command=textarea.yview, relief=RAISED)
         yview_scrollbar.pack(side=RIGHT, fill=Y)
@@ -238,7 +237,7 @@ def start(*awargs):
         checkpoint_window.geometry(f'{width}x{height}+{x}+{y}')
         checkpoint_window.config(bg=color_bg.get())
         close_button_image = PhotoImage(
-            file=r"assests\close_icon.png")
+            file=r"assets/close_icon.png")
         close_button = Button(
             checkpoint_window, bd=0, bg=color_bg.get(), command=checkpoint_window.destroy)
         close_button.config(image=close_button_image)
@@ -338,7 +337,7 @@ def start(*awargs):
                     "Invalid selection!", "Please select a valid checkpoint!")
 
         restore_button_image = PhotoImage(
-            file=r"assests\restore.png")
+            file=r"assets/restore.png")
         restore_button = Button(checkpoint_window, bd=0,
                                 bg=color_bg.get(), command=save_checkpoint)
         restore_button.config(image=restore_button_image)
